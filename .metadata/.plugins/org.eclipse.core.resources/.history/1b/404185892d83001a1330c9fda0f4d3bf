@@ -1,0 +1,6 @@
+package com.example.repository;
+
+public interface UserDao extends CrudRepositroy<User, Integer>{
+
+	public User findByUsername(String username);
+}

@@ -1,0 +1,55 @@
+<div class="container text-center">
+    <div class="row  text-center">
+        <h1 style="display: block;">Hello {{user.username}}</h1>
+        
+        
+    </div>
+    <div class="row text-center">
+        <h2 style="display: block;">The Time is:</h2>
+    </div>
+    <div class="row text-center">
+        <h3 style="display: block;">{{time | worddate}}</h3>
+    </div>
+    <div class="row text-center">
+      
+            <table>
+                <thead>
+                    <th>Event</th>
+                    <th>Location</th>
+                    <th>Creator</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                </thead>
+                <tbody *ngIf="events.length==0">
+                    <tr>No events yet</tr>
+                </tbody>
+                <tbody *ngIf="events">
+                    <tr *ngFor="let event of events">
+                        <td>{{event.eventTitle}}</td>
+                        <td>{{event.eventLocation}}</td>
+                        <td>{{event.eventCreator.username}}</td>
+                        <td>{{event.eventDate}}</td>
+                        <td>{{event.eventTime}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        
+    </div>
+    <div class="row">
+        <form (submit)="submit()" #eventForm="ngForm">
+            <div class="form-group"><input type="text" placeholder="Title" [(ngModel)]="newEvent.eventTitle" name="title"></div>
+            <div class="form-group"><input type="text" placeholder="Location" [(ngModel)]="newEvent.eventLocation" name="location"></div>
+            <div class="form-group"><input type="date" [(ngModel)]="newEvent.eventDate" name="date"></div>
+            <div class="form-group"><input type="time" [(ngModel)]="newEvent.eventTime" name="time"></div>
+            <div class="form-group"><input type="submit"></div>
+
+            
+            
+            
+            
+            
+        </form>
+    </div>
+    
+    
+</div>

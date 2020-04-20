@@ -1,0 +1,7 @@
+package com.example.repository;
+import com.example.models.EUser;
+
+public interface UserDao extends CrudRepositroy<EUser, Integer>{
+
+	public User findByUsername(String username);
+}

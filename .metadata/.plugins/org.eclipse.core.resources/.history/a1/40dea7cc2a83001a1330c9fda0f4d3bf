@@ -1,0 +1,39 @@
+package com.example.models;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+@Entity
+@Table(name="user")
+public class User {
+	
+	@Id
+	@Column(name="user_id")
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int userId;
+	
+	@Column(name="username")
+	@NotNull
+	private String username;
+	
+	@JsonManagedReference
+	@OneToMany(
+			mappedBy = "event_user_id",
+			cascade=CascadeType.ALL,
+			fetch=FetchType.EAGER)
+	private List<Event> eventList = new ArrayList<>();
+	
+}

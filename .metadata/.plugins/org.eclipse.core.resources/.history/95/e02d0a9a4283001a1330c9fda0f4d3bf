@@ -1,0 +1,166 @@
+package com.example.models;
+
+import java.sql.Date;
+import java.sql.Timestamp;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+@Entity
+@Table(name="event")
+public class Event {
+	
+	@Id
+	@Column(name="event_id")
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int eventId;
+	
+	@Column(name="event_title")
+	@NotNull
+	private String eventTitle;
+	
+	@Column(name="event_location")
+	@NotNull
+	private String eventLocation;
+	
+	@Column(name="event_date")
+	@NotNull
+	private Date eventDate;
+	
+	@Column(name="event_time")
+	@NotNull
+	private Timestamp eventTime;
+	
+	@Column(name="event_user_id", updatable=false, insertable=false)
+	@NotNull
+	private int userFk;
+	
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinColumn(name="event_user_id")
+	private EUser eventCreator;
+	
+	
+	public Event() {
+		// TODO Auto-generated constructor stub
+	}
+
+
+	public Event(int eventId, @NotNull String eventTitle, @NotNull String eventLocation, @NotNull Date eventDate,
+			@NotNull Timestamp eventTime, @NotNull int userFk, EUser eventCreator) {
+		super();
+		this.eventId = eventId;
+		this.eventTitle = eventTitle;
+		this.eventLocation = eventLocation;
+		this.eventDate = eventDate;
+		this.eventTime = eventTime;
+		this.userFk = userFk;
+		this.eventCreator = eventCreator;
+	}
+
+	
+
+
+
+	public Event(@NotNull String eventTitle, @NotNull String eventLocation, @NotNull Date eventDate,
+			@NotNull Timestamp eventTime, @NotNull int userFk) {
+		super();
+		this.eventTitle = eventTitle;
+		this.eventLocation = eventLocation;
+		this.eventDate = eventDate;
+		this.eventTime = eventTime;
+		this.userFk = userFk;
+	}
+
+
+	public int getEventId() {
+		return eventId;
+	}
+
+	public void setEventId(int eventId) {
+		this.eventId = eventId;
+	}
+
+	public String getEventTitle() {
+		return eventTitle;
+	}
+
+	public void setEventTitle(String eventTitle) {
+		this.eventTitle = eventTitle;
+	}
+
+	public Date getEventDate() {
+		return eventDate;
+	}
+
+	public void setEventDate(Date eventDate) {
+		this.eventDate = eventDate;
+	}
+
+
+	public int getUserFk() {
+		return userFk;
+	}
+
+
+	public void setUserFk(int userFk) {
+		this.userFk = userFk;
+	}
+
+
+	public EUser getEventCreator() {
+		return eventCreator;
+	}
+
+
+	public void setEventCreator(EUser eventCreator) {
+		this.eventCreator = eventCreator;
+	}
+	
+	
+
+
+	public String getEventLocation() {
+		return eventLocation;
+	}
+
+
+	public void setEventLocation(String eventLocation) {
+		this.eventLocation = eventLocation;
+	}
+
+
+	public Timestamp getEventTime() {
+		return eventTime;
+	}
+
+
+	public void setEventTime(Timestamp eventTime) {
+		this.eventTime = eventTime;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Event [eventId=" + eventId + ", eventTitle=" + eventTitle + ", eventLocation=" + eventLocation
+				+ ", eventDate=" + eventDate + ", eventTime=" + eventTime + ", userFk=" + userFk + ", eventCreator="
+				+ eventCreator + "]";
+	}
+
+
+	
+
+	
+	
+	
+	
+
+}

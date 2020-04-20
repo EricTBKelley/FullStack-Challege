@@ -1,0 +1,28 @@
+package com.example.controllers;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.repository.EventDao;
+
+@RestController("EventController")
+@RequestMapping("/event")
+@CrossOrigin(origins="*")
+public class EventController {
+	
+	private EventDao eventDao;
+	
+	public EventController() {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Autowired
+	public EventController(EventDao eventDao) {
+		super();
+		this.eventDao = eventDao;
+	}
+	
+	
+
+}

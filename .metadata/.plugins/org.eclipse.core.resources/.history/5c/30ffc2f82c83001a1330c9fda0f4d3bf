@@ -1,0 +1,132 @@
+package com.example.models;
+
+import java.sql.Date;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+@Entity
+@Table(name="event")
+public class Event {
+	
+	@Id
+	@Column(name="event_id")
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int eventId;
+	
+	@Column(name="event_title")
+	@NotNull
+	private String eventTitle;
+	
+	@Column(name="event_date")
+	@NotNull
+	private DateTime eventDate;
+	
+	@Column(name="event_user_id", updatable=false, insertable=false)
+	@NotNull
+	private int userFk;
+	
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinColumn(name="event_user_id")
+	private User eventCreator;
+	
+	
+	public Event() {
+		// TODO Auto-generated constructor stub
+	}
+
+
+	public Event(int eventId, @NotNull String eventTitle, @NotNull Date eventDate, @NotNull int userFk,
+			User eventCreator) {
+		super();
+		this.eventId = eventId;
+		this.eventTitle = eventTitle;
+		this.eventDate = eventDate;
+		this.userFk = userFk;
+		this.eventCreator = eventCreator;
+	}
+
+	
+
+
+
+
+
+
+	public Event(@NotNull String eventTitle, @NotNull Date eventDate, @NotNull int userFk) {
+		super();
+		this.eventTitle = eventTitle;
+		this.eventDate = eventDate;
+		this.userFk = userFk;
+	}
+
+
+	public int getEventId() {
+		return eventId;
+	}
+
+	public void setEventId(int eventId) {
+		this.eventId = eventId;
+	}
+
+	public String getEventTitle() {
+		return eventTitle;
+	}
+
+	public void setEventTitle(String eventTitle) {
+		this.eventTitle = eventTitle;
+	}
+
+	public Date getEventDate() {
+		return eventDate;
+	}
+
+	public void setEventDate(Date eventDate) {
+		this.eventDate = eventDate;
+	}
+
+
+	public int getUserFk() {
+		return userFk;
+	}
+
+
+	public void setUserFk(int userFk) {
+		this.userFk = userFk;
+	}
+
+
+	public User getEventCreator() {
+		return eventCreator;
+	}
+
+
+	public void setEventCreator(User eventCreator) {
+		this.eventCreator = eventCreator;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Event [eventId=" + eventId + ", eventTitle=" + eventTitle + ", eventDate=" + eventDate + ", userFk="
+				+ userFk + ", eventCreator=" + eventCreator + "]";
+	}
+
+
+	
+	
+	
+	
+
+}
