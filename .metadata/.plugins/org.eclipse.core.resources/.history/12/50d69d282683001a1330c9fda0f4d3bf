@@ -4,9 +4,9 @@ server:
   
 spring:
   datasource:
-    url: jdbc:postgresql://rev-chan.csealuzhvl1n.us-east-1.rds.amazonaws.com:5432/repositoryoftime
-    username: ${WORD_CLOCK_USERNAME}
-    password: ${WORD_CLOCK_PASSWORD}
+    url: jdbc:postgresql://rev-chan.csealuzhvl1n.us-east-1.rds.amazonaws.com:5432/wordclock
+    username: celeryman
+    password: tayne
     driver-class-name: org.postgresql.Driver
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
