@@ -33,6 +33,7 @@ public class EventController {
 	
 	@PostMapping("/save")
 	public @ResponseBody Event saveEvent(@RequestBody Event event) {
+		System.out.println(event);
 		return this.eventDao.save(event);
 	}
 	

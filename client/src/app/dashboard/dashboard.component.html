@@ -20,7 +20,7 @@
                     <th>Date</th>
                     <th>Time</th>
                 </thead>
-                <tbody *ngIf="events.length==0">
+                <tbody *ngIf="!events">
                     <tr>No events yet</tr>
                 </tbody>
                 <tbody *ngIf="events">
@@ -29,18 +29,18 @@
                         <td>{{event.eventLocation}}</td>
                         <td>{{event.eventCreator.username}}</td>
                         <td>{{event.eventDate}}</td>
-                        <td>{{event.eventTime}}</td>
+                        <td>{{event.eventTime | stringworddate}}</td>
                     </tr>
                 </tbody>
             </table>
         
     </div>
     <div class="row">
-        <form (submit)="submit()" #eventForm="ngForm">
-            <div class="form-group"><input type="text" placeholder="Title" [(ngModel)]="newEvent.eventTitle" name="title"></div>
-            <div class="form-group"><input type="text" placeholder="Location" [(ngModel)]="newEvent.eventLocation" name="location"></div>
-            <div class="form-group"><input type="date" [(ngModel)]="newEvent.eventDate" name="date"></div>
-            <div class="form-group"><input type="time" [(ngModel)]="newEvent.eventTime" name="time"></div>
+        <form (submit)="submit(); eventForm.resetForm()" #eventForm="ngForm">
+            <div class="form-group"><input type="text" placeholder="Title" [(ngModel)]="newEvent.eventTitle" name="eventTitle"></div>
+            <div class="form-group"><input type="text" placeholder="Location" [(ngModel)]="newEvent.eventLocation" name="eventLocation"></div>
+            <div class="form-group"><input type="date" [(ngModel)]="newEvent.eventDate" name="eventDate"></div>
+            <div class="form-group"><input type="time" [(ngModel)]="newEvent.eventTime" name="eventTime"></div>
             <div class="form-group"><input type="submit"></div>
 
             

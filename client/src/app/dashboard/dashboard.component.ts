@@ -15,28 +15,37 @@ export class DashboardComponent implements OnInit {
   time: Date = new Date();
   events: UEvent[];
 
-  constructor(private _service: MainService) { 
+  constructor(private _service: MainService) {
     this.user = <EUser>JSON.parse(localStorage.getItem('loggedUser'));
     this.newEvent = new UEvent();
-  }
+    this._service.getAllEvents().subscribe(data => {
+      if (data == undefined) {
+        this.events = new Array();
 
-  ngOnInit(): void {
-    setInterval(()=> {
-      this.time = new Date();
-    }, 1000);
-
-    this._service.getAllEvents().subscribe(data =>{
-      this.events = data;
+      } else {
+        this.events = data;
+        console.log(this.events);
+      }
     })
   }
 
-  submit(){
-    this.newEvent.userFk = this.user.userId;
-    console.log(this.newEvent)
-    this._service.saveEvent(this.newEvent).subscribe(res => {
-      this.ngOnInit();
-    }
-    );
+  ngOnInit() { }
+
+  ngDoChanges(): void {
+    setInterval(() => {
+      this.time = new Date();
+    }, 1000);
+
+
   }
 
+  submit() {
+    this.newEvent.eventCreator = this.user;
+    console.log(this.newEvent)
+    this._service.saveEvent(this.newEvent).subscribe(res => {
+      this._service.getAllEvents().subscribe(data => {
+        this.events = data;
+      })
+    });
+  }
 }

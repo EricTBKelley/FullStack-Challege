@@ -9,13 +9,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { WorddatePipe } from './pipe/worddate.pipe';
+import { StringworddatePipe } from './pipe/stringworddate.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     LandingComponent,
     DashboardComponent,
-    WorddatePipe
+    WorddatePipe,
+    StringworddatePipe
   ],
   imports: [
     BrowserModule,

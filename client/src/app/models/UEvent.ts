@@ -8,6 +8,5 @@ export class UEvent{
     eventLocation: string;
     eventDate: Date;
     eventTime: Time;
-    userFk: number;
     eventCreator: EUser;
 }

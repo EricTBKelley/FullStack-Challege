@@ -1,8 +1,5 @@
 package com.example.models;
 
-import java.sql.Date;
-import java.sql.Timestamp;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="event")
@@ -40,11 +39,7 @@ public class Event {
 	@NotNull
 	private String eventTime;
 	
-	@Column(name="event_user_id", updatable=false, insertable=false)
-	@NotNull
-	private int userFk;
-	
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@ManyToOne(cascade=CascadeType.MERGE, fetch=FetchType.EAGER)
 	@JoinColumn(name="event_user_id")
 	private EUser eventCreator;
 	
@@ -55,14 +50,13 @@ public class Event {
 
 
 	public Event(int eventId, @NotNull String eventTitle, @NotNull String eventLocation, @NotNull String eventDate,
-			@NotNull String eventTime, @NotNull int userFk, EUser eventCreator) {
+			@NotNull String eventTime, EUser eventCreator) {
 		super();
 		this.eventId = eventId;
 		this.eventTitle = eventTitle;
 		this.eventLocation = eventLocation;
 		this.eventDate = eventDate;
 		this.eventTime = eventTime;
-		this.userFk = userFk;
 		this.eventCreator = eventCreator;
 	}
 
@@ -71,13 +65,12 @@ public class Event {
 
 
 	public Event(@NotNull String eventTitle, @NotNull String eventLocation, @NotNull String eventDate,
-			@NotNull String eventTime, @NotNull int userFk) {
+			@NotNull String eventTime, int userFk) {
 		super();
 		this.eventTitle = eventTitle;
 		this.eventLocation = eventLocation;
 		this.eventDate = eventDate;
 		this.eventTime = eventTime;
-		this.userFk = userFk;
 	}
 
 
@@ -106,14 +99,6 @@ public class Event {
 	}
 
 
-	public int getUserFk() {
-		return userFk;
-	}
-
-
-	public void setUserFk(int userFk) {
-		this.userFk = userFk;
-	}
 
 
 	public EUser getEventCreator() {
@@ -150,9 +135,10 @@ public class Event {
 	@Override
 	public String toString() {
 		return "Event [eventId=" + eventId + ", eventTitle=" + eventTitle + ", eventLocation=" + eventLocation
-				+ ", eventDate=" + eventDate + ", eventTime=" + eventTime + ", userFk=" + userFk + ", eventCreator="
-				+ eventCreator + "]";
+				+ ", eventDate=" + eventDate + ", eventTime=" + eventTime + ", eventCreator=" + eventCreator + "]";
 	}
+
+	
 
 
 	
